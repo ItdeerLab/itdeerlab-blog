@@ -1,16 +1,57 @@
-# Compiled class file
+
+### STS 开发工具 ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+
+
+### Maven 工具 ###
+mvnw
+mvnw.cmd
+dependency-reduced-pom.xml
+
+
+
+### IntelliJ IDEA 开发工具 ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+
+
+### NetBeans 开发工具 ###
+/nbproject/private/
+/build/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+
+
+
+### Compiled class file 编译文件 ###
 *.class
+.git
 
-# Log file
-*.log
 
-# BlueJ files
-*.ctxt
 
-# Mobile Tools for Java (J2ME)
+### Log file 日志文件 ###
+*.exceptionRecord
+
+
+
+### Mobile Tools for Java (J2ME) 手机开发相关工具 ###
 .mtj.tmp/
 
-# Package Files #
+
+
+### Package Files 打包文件 ###
 *.jar
 *.war
 *.nar
@@ -18,6 +59,13 @@
 *.zip
 *.tar.gz
 *.rar
+target/
 
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+
+
+### 其他文件 ###
+*.ctxt
 hs_err_pid*
+!.mvn/wrapper/maven-wrapper.jar
+.mvn
+/tmp/
