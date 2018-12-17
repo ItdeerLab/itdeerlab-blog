@@ -1,5 +1,6 @@
 package cn.itdeer.admin.blog.entity;
 
+import cn.itdeer.admin.system.entity.User;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import lombok.ToString;
@@ -34,9 +35,15 @@ public class Article implements Serializable {
     private String title;
 
     @Basic
+    @Column(name = "summary",columnDefinition = "varchar(200) COMMENT '文章摘要'")
+    private String summary;
+
+    @Lob
+    @Basic
     @Column(name = "textContent",columnDefinition = "TEXT COMMENT 'TEXT内容'")
     private String textContent;
 
+    @Lob
     @Basic
     @Column(name = "htmlContent",columnDefinition = "TEXT COMMENT 'HTML内容'")
     private String htmlContent;
@@ -58,9 +65,18 @@ public class Article implements Serializable {
     @Column(name = "hits",columnDefinition = "INTEGER COMMENT '点击数'")
     private Integer hits;
 
-//    private String category;
 
-//    private String tags;
+    @Basic
+//    @ManyToOne
+    @Column(name = "category",columnDefinition = "varchar(50) COMMENT '封面图片ID'")
+    private Category category;
 
+    @Basic
+    @Column(name = "tags",columnDefinition = "varchar(50) COMMENT '封面图片ID'")
+    private String tags;
+
+    @OneToOne(cascade = CascadeType.DETACH,fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private User user;
 
 }
