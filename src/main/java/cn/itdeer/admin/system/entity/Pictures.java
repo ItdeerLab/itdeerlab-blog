@@ -22,7 +22,7 @@ public class Pictures implements Serializable {
 
     @Id
     @GeneratedValue(generator = "id")
-    @GenericGenerator(name = "id", strategy = "uuid")
+    @GenericGenerator(name = "id", strategy = "org.hibernate.id.UUIDGenerator")
     @Column(name = "id", columnDefinition = "varchar(50) COMMENT 'ID编号'")
     private String id;
 
