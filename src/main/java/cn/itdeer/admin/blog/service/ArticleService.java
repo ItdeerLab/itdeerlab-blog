@@ -8,4 +8,5 @@ package cn.itdeer.admin.blog.service;
  * CreateTime : 18-12-17/下午5:10
  */
 public interface ArticleService {
+
 }

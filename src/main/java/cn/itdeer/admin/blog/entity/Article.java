@@ -1,5 +1,6 @@
 package cn.itdeer.admin.blog.entity;
 
+import cn.itdeer.admin.system.entity.Pictures;
 import cn.itdeer.admin.system.entity.User;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
@@ -9,6 +10,7 @@ import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.Set;
 
 /**
  * Description : 博客管理(Article文章)实体类
@@ -26,56 +28,51 @@ public class Article implements Serializable {
 
     @Id
     @GeneratedValue(generator = "id")
-    @GenericGenerator(name = "id",strategy = "uuid")
-    @Column(name = "id",columnDefinition = "varchar(50) COMMENT 'ID编号'")
+    @GenericGenerator(name = "id", strategy = "uuid")
+    @Column(name = "id", columnDefinition = "varchar(50) COMMENT 'ID编号'")
     private String id;
 
-    @Basic
-    @Column(name = "title",columnDefinition = "varchar(50) COMMENT '文章标题'")
+    @Column(name = "title", columnDefinition = "varchar(50) COMMENT '文章标题'")
     private String title;
 
-    @Basic
-    @Column(name = "summary",columnDefinition = "varchar(200) COMMENT '文章摘要'")
+    @Column(name = "summary", columnDefinition = "varchar(200) COMMENT '文章摘要'")
     private String summary;
 
     @Lob
-    @Basic
-    @Column(name = "textContent",columnDefinition = "TEXT COMMENT 'TEXT内容'")
+    @Column(name = "textContent", columnDefinition = "TEXT COMMENT 'TEXT内容'")
     private String textContent;
 
     @Lob
-    @Basic
-    @Column(name = "htmlContent",columnDefinition = "TEXT COMMENT 'HTML内容'")
+    @Column(name = "htmlContent", columnDefinition = "TEXT COMMENT 'HTML内容'")
     private String htmlContent;
 
-    @Basic
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @Column(name = "releaseDate",columnDefinition = "INTEGER COMMENT '发布时间'")
+    @Column(name = "releaseDate", columnDefinition = "INTEGER COMMENT '发布时间'")
     private Timestamp releaseDate;
 
-    @Basic
-    @Column(name = "releaseState",columnDefinition = "BIT COMMENT '发布状态'")
+    @Column(name = "releaseState", columnDefinition = "BIT COMMENT '发布状态'")
     private Boolean releaseState;
 
-    @Basic
-    @Column(name = "coverPath",columnDefinition = "varchar(50) COMMENT '封面图片ID'")
-    private String coverPath;
-
-    @Basic
-    @Column(name = "hits",columnDefinition = "INTEGER COMMENT '点击数'")
+    @Column(name = "hits", columnDefinition = "INTEGER COMMENT '点击数'")
     private Integer hits;
 
-
-    @Basic
-//    @ManyToOne
-    @Column(name = "category",columnDefinition = "varchar(50) COMMENT '封面图片ID'")
+    @ManyToOne
+    @JoinColumn(name = "category_id")
     private Category category;
 
-    @Basic
-    @Column(name = "tags",columnDefinition = "varchar(50) COMMENT '封面图片ID'")
-    private String tags;
+    @OneToOne
+    @JoinColumn(name = "picture_id")
+    private Pictures picture;
 
-    @OneToOne(cascade = CascadeType.DETACH,fetch = FetchType.LAZY)
+    @ManyToMany
+    @JoinTable(
+            name = "blog_article_tags",
+            joinColumns = @JoinColumn(name = "article_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "tag_id", referencedColumnName = "id")
+    )
+    private Set<Tag> tags;
+
+    @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
 

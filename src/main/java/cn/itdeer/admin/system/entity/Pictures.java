@@ -8,17 +8,18 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 /**
- * Description : 系统-用户-实体类
+ * Description : 系统-图片-实体类
  * PackageName : cn.itdeer.admin.system.entity
  * ProjectName : itdeerlab-blog
  * CreatorName : itdeer.cn
- * CreateTime : 2018/12/17/21:49
+ * CreateTime : 19-1-7/下午4:00
  */
 @Data
 @Entity
 @ToString
-@Table(name = "system_user")
-public class User implements Serializable {
+@Table(name = "system_pictures")
+public class Pictures implements Serializable {
+
     @Id
     @GeneratedValue(generator = "id")
     @GenericGenerator(name = "id", strategy = "uuid")
@@ -26,11 +27,16 @@ public class User implements Serializable {
     private String id;
 
     
-    @Column(name = "userName", columnDefinition = "varchar(50) COMMENT '用户名称'")
-    private String userName;
+    @Column(name = "name", columnDefinition = "varchar(50) COMMENT '图片名称'")
+    private String name;
+
 
     
-    @Column(name = "passWord", columnDefinition = "varchar(50) COMMENT '用户密码'")
-    private String passWord;
+    @Column(name = "url", columnDefinition = "varchar(100) COMMENT '图片的URL'")
+    private String url;
+
     
+    @Column(name = "description", columnDefinition = "varchar(100) COMMENT '图片的描述'")
+    private String description;
+
 }
